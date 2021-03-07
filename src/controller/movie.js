@@ -14,8 +14,8 @@ exports.getMovies = (req, res) => {
         })
 }
 exports.getMoviesById = (req, res) => {
-    const movie = req.params.id
-    moviesModel.getMoviesById(movie)
+    const id = req.params.id
+    moviesModel.getMoviesById(id)
         .then((result) => {
             res.json({
                 movie: result
@@ -25,7 +25,16 @@ exports.getMoviesById = (req, res) => {
             console.log(err);
         })
 }
-
+exports.getLimitMovies = (req, res) => {
+    moviesModel.getLimitMovies()
+        .then((result) => {
+            res.json({
+                movie: result
+            })
+        }).catch((err) => {
+            console.log(err);
+        })
+}
 
 exports.insertMovies = (req, res) => {
     const {movie_Id, title, genre, movie_duration, directed_by, casts, Synopsis, price} = req.body
