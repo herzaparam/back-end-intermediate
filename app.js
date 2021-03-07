@@ -20,5 +20,5 @@ app.use('/ticket', ticketRouter)
 app.use('/transaction', transactionRouter)
 
 app.listen(port, () => {
-    console.log('server is running port ' + port);
+  console.log('server is running port ' + port)
 })

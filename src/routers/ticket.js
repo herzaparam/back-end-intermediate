@@ -3,10 +3,10 @@ const router = express.Router()
 const ticketController = require('../controller/ticket')
 
 router
-    .get('/', ticketController.getTicket)
-    .get('/:id', ticketController.getTicketById)
-    .post('/', ticketController.insertTicket)
-    .put('/:id', ticketController.updateTicket)
-    .delete('/:id', ticketController.deleteTicket)
+  .get('/', ticketController.getTicket)
+  .get('/:id', ticketController.getTicketById)
+  .post('/', ticketController.insertTicket)
+  .put('/:id', ticketController.updateTicket)
+  .delete('/:id', ticketController.deleteTicket)
 
 module.exports = router
