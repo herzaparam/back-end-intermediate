@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const port = process.env.PORT
 const bodyParser = require('body-parser')
 const moviesRouter = require('./src/routers/movie')
@@ -12,6 +13,7 @@ const transactionRouter = require('./src/routers/transaction')
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use('/movies', moviesRouter)
 app.use('/user', userRouter)
