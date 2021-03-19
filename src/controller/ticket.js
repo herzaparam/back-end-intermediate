@@ -1,22 +1,33 @@
 const ticketModel = require('../model/ticket')
+const helpers = require('../helper/helper')
 
 exports.getTicket = (req, res) => {
-  ticketModel.getTicket()
+  const sort = req.query.sort
+  ticketModel.getTicket(sort)
     .then((result) => {
-      res.json({
-        ticket: result
-      })
+      const resultProduct = result
+      helpers.response(res, resultProduct, 200)
     }).catch((err) => {
       console.log(err)
     })
 }
+exports.getHistoryTicket = (req, res) =>{
+  const id = req.params.iduser
+  ticketModel.getHistoryTicket(id)
+  .then((result) => {
+    const resultProduct = result
+    helpers.response(res, resultProduct, 200)
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+
 exports.getTicketById = (req, res) => {
   const id = req.params.id
   ticketModel.getTicketById(id)
     .then((result) => {
-      res.json({
-        ticket: result
-      })
+      const resultProduct = result
+      helpers.response(res, resultProduct, 200)
     }).catch((err) => {
       console.log(err)
     })
@@ -34,9 +45,8 @@ exports.insertTicket = (req, res) => {
   }
   ticketModel.insertTicket(tick)
     .then((result) => {
-      res.json({
-        ticket: result
-      })
+      const resultProduct = result
+      helpers.response(res, resultProduct, 200)
     }).catch((err) => {
       console.log(err)
     })
@@ -54,9 +64,8 @@ exports.updateTicket = (req, res) => {
   }
   ticketModel.updateTicket(id, ticket)
     .then((result) => {
-      res.json({
-        ticket: result
-      })
+      const resultProduct = result
+      helpers.response(res, resultProduct, 200)
     }).catch((err) => {
       console.log(err)
     })
@@ -65,9 +74,8 @@ exports.deleteTicket = (req, res) => {
   const id = req.params.id
   ticketModel.deleteTicket(id)
     .then((result) => {
-      res.json({
-        ticket: result
-      })
+      const resultProduct = result
+      helpers.response(res, resultProduct, 200)
     }).catch((err) => {
       console.log(err)
     })

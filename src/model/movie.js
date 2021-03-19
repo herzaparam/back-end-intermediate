@@ -3,7 +3,7 @@ const connection = require('../config/db')
 const movies = {
     getMovies: () => {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM movie_details', (err, result) => {
+            connection.query('SELECT * FROM movie_details LIMIT 5', (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {

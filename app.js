@@ -4,12 +4,6 @@ const app = express()
 const cors = require('cors')
 const port = process.env.PORT
 const morgan = require('morgan')
-// const bodyParser = require('body-parser')
-// const moviesRouter = require('./src/routers/movie')
-// const userRouter = require('./src/routers/user')
-// const locationRouter = require('./src/routers/location')
-// const ticketRouter = require('./src/routers/ticket')
-// const transactionRouter = require('./src/routers/transaction')
 const route = require('./src/routers/index')
 const createError = require('http-errors')
 
@@ -19,11 +13,6 @@ app.use(express.json())
 app.use(cors())
 app.use(morgan('dev'))
 
-// app.use('/movies', moviesRouter)
-// app.use('/user', userRouter)
-// app.use('/location', locationRouter)
-// app.use('/ticket', ticketRouter)
-// app.use('/transaction', transactionRouter)
 app.use('/v1', route)
 
 app.use('*',(req,res,next)=>{

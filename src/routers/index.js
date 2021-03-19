@@ -4,13 +4,16 @@ const routeMovie = require('./movie')
 const routeLocation = require('./location')
 const routeTicket = require('./ticket')
 const routeTransaction = require('./transaction')
-const routeUser = require('./user')
+const routeUserReg = require('./user')
+const routeUserLogin = require('./usersignin')
 
 
 route.use('/movies', routeMovie)
 route.use('/location', routeLocation)
 route.use('/ticket', routeTicket)
 route.use('/transaction', routeTransaction)
-route.use('/users', routeUser)
+route.use('/signin', routeUserLogin)
+route.use('/signup', routeUserReg)
+route.use('/profile', routeUserReg)
 
 module.exports = route

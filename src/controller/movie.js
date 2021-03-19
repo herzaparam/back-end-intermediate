@@ -1,37 +1,37 @@
 const moviesModel = require('../model/movie')
 const createError = require('http-errors')
+const helpers = require('../helper/helper')
 
-exports.getMovies = (req, res) => {
+exports.getMovies = (req, res, next) => {
     moviesModel.getMovies()
         .then((result) => {
-            res.json({
-                movie: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         })
         .catch((err) => {
-            console.log(err)
+            const error = new createError.InternalServerError()
+            next(error)
         })
 }
 
-exports.getLimitMovies = (req, res) => {
+exports.getLimitMovies = (req, res, next) => {
     const limit = req.query.limit
     const page = req.query.page
     moviesModel.getLimitMovies(limit, page)
         .then((result) => {
-            res.json({
-                movie: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         }).catch((err) => {
-            console.log(err)
+            const error = new createError.InternalServerError()
+            next(error)
         })
 }
 exports.getMoviesById = (req, res, next) => {
     const id = req.params.id
     moviesModel.getMoviesById(id)
         .then((result) => {
-            res.json({
-                movie: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         })
         .catch((err) => {
             const error = new createError.InternalServerError()
@@ -40,10 +40,10 @@ exports.getMoviesById = (req, res, next) => {
 }
 
 
-exports.insertMovies = (req, res) => {
-    const { movie_Id, title, genre, movie_duration, directed_by, casts, Synopsis, price } = req.body
+exports.insertMovies = (req, res, next) => {
+    const { title, genre, movie_duration, directed_by, casts, Synopsis, price } = req.body
     const detail = {
-        movie_Id,
+
         title,
         genre,
         movie_duration,
@@ -54,16 +54,16 @@ exports.insertMovies = (req, res) => {
     }
     moviesModel.insertMovies(detail)
         .then((result) => {
-            res.json({
-                movies: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         })
         .catch((err) => {
-            console.log(err)
+            const error = new createError.InternalServerError()
+            next(error)
         })
 }
 
-exports.updateMovies = (req, res) => {
+exports.updateMovies = (req, res, next) => {
     const moviesId = req.params.id
     const { movie_Id, title, genre, movie_duration, directed_by, casts, Synopsis, price } = req.body
 
@@ -80,24 +80,24 @@ exports.updateMovies = (req, res) => {
     }
     moviesModel.updateMovies(moviesId, data)
         .then((result) => {
-            res.json({
-                data: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         })
         .catch((err) => {
-            console.log(err)
+            const error = new createError.InternalServerError()
+            next(error)
         })
 }
 
-exports.deleteMovies = (req, res) => {
+exports.deleteMovies = (req, res, next) => {
     const movieId = req.params.id
     moviesModel.deleteMovies(movieId)
         .then((result) => {
-            res.json({
-                detail: result
-            })
+            const resultProduct = result
+            helpers.response(res, resultProduct, 200)
         })
         .catch((err) => {
-            console.log(err)
+            const error = new createError.InternalServerError()
+            next(error)
         })
 }

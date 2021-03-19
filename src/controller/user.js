@@ -1,17 +1,7 @@
 const userModel = require('../model/user')
 
-exports.getUser = (req, res) => {
-  userModel.getUser()
-    .then((result) => {
-      res.json({
-        user: result
-      })
-    }).catch((err) => {
-      console.log(err)
-    })
-}
 exports.getUserById = (req, res) => {
-  const id = req.params.id
+  const id = req.params.iduser
   userModel.getUserById(id)
     .then((result) => {
       res.json({
@@ -21,14 +11,27 @@ exports.getUserById = (req, res) => {
       console.log(err)
     })
 }
+exports.getUser = (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+  console.log(email);
+  console.log();
+  userModel.getUser(email, password)
+    .then((result) => {
+      res.json({
+        user: result
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
+}
 exports.insertUser = (req, res) => {
-  const { user_Id, name, email, phone_number } = req.body
+  const {  email, password } = req.body
   const user = {
-    user_Id,
-    name,
     email,
-    phone_number
+    password
   }
+  console.log(user);
   userModel.insertUser(user)
     .then((result) => {
       res.json({
@@ -39,11 +42,12 @@ exports.insertUser = (req, res) => {
     })
 }
 exports.updateUser = (req, res) => {
-  const userId = req.params.id
-  const { user_Id, name, email, phone_number } = req.body
+  const userId = req.params.iduser
+  const { user_Id, fname, lname, email, phone_number } = req.body
   const user = {
     user_Id,
-    name,
+    fname,
+    lname,
     email,
     phone_number
   }

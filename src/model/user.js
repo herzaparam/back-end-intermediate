@@ -1,9 +1,9 @@
 const connection = require('../config/db')
 
 const user = {
-  getUser: () => {
+  getUserById: (id) => {
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM user', (err, result) => {
+      connection.query('SELECT * FROM user WHERE user_Id = ?', id, (err, result) => {
         if (!err) {
           resolve(result)
         } else {
@@ -12,9 +12,9 @@ const user = {
       })
     })
   },
-  getUserById: (id) => {
+  getUser: (email, password) => {
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM user WHERE user_Id = ?', id, (err, result) => {
+      connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, result) => {
         if (!err) {
           resolve(result)
         } else {
