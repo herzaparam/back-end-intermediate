@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controller/user')
+const auth = require('../middleware/auth')
 
 router
-  // .get('/', userController.getUser)
-  .get('/', userController.getUser)
-  .get('/:iduser', userController.getUserById)
-  .post('/', userController.insertUser)
+  .get('/profile/:iduser', auth.verifyAcces, userController.getUserById)
+  .post('/register', userController.register)
+  .post('/login', userController.login)
   .put('/:iduser', userController.updateUser)
   .delete('/:id', userController.deleteUser)
 

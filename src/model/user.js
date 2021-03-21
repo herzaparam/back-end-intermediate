@@ -1,6 +1,18 @@
 const connection = require('../config/db')
 
 const user = {
+  findUser: (email) =>{
+    return new Promise ((resolve, reject)=>{
+      connection.query('SELECT * FROM user WHERE email = ?', email, (err, result)=>{
+        if (!err){
+          resolve(result)
+        } else {
+          reject(err)
+        }
+      })
+    })
+  },
+
   getUserById: (id) => {
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM user WHERE user_Id = ?', id, (err, result) => {
@@ -12,7 +24,7 @@ const user = {
       })
     })
   },
-  getUser: (email, password) => {
+  login: (email, password) => {
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, result) => {
         if (!err) {
@@ -25,7 +37,7 @@ const user = {
       })
     })
   },
-  insertUser: (user) => {
+  register: (user) => {
     return new Promise((resolve, reject) => {
       connection.query('INSERT INTO user SET ?', user, (err, result) => {
         if (!err) {

@@ -14,6 +14,7 @@ app.use(cors())
 app.use(morgan('dev'))
 
 app.use('/v1', route)
+app.use('/img', express.static('./image'))
 
 app.use('*',(req,res,next)=>{
     const error = new createError.NotFound()
