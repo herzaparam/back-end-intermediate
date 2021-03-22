@@ -1,13 +1,18 @@
 const moviesModel = require('../model/movie')
 const createError = require('http-errors')
 const helpers = require('../helper/helper')
-const {v4:uuidv4} = require('uuid')
+const { v4: uuidv4 } = require('uuid')
+const redis = require('redis')
+const client = redis.createClient(6379)
 
-exports.getMovies = (req, res, next) => {
-    moviesModel.getMovies()
+exports.getAllMovies = (req, res, next) => {
+    moviesModel.getAllMovies()
         .then((result) => {
-            const resultProduct = result
-            helpers.response(res, resultProduct, 200)
+            const resultMovies = result
+            client.setex("getAllMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
+            // setTimeout(()=>{
+            helpers.response(res, resultMovies, 200)
+            // }, 1000)
         })
         .catch((err) => {
             const error = new createError.InternalServerError()
@@ -52,7 +57,7 @@ exports.insertMovies = (req, res, next) => {
         casts,
         Synopsis,
         price,
-        image : `http://localhost:8000/img/${req.file.filename}`
+        image: `http://localhost:8000/img/${req.file.filename}`
     }
     moviesModel.insertMovies(detail)
         .then((result) => {

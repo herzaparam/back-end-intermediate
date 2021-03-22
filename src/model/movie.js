@@ -1,9 +1,9 @@
 const connection = require('../config/db')
 
 const movies = {
-    getMovies: () => {
+    getAllMovies: () => {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM movie_details LIMIT 5', (err, result) => {
+            connection.query('SELECT * FROM movie_details', (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {
@@ -14,7 +14,7 @@ const movies = {
     },
     getLimitMovies: (limit, page) => {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM movie_details LIMIT ${(limit*page)-limit}, ${limit} `,(err, result) => {
+            connection.query(`SELECT * FROM movie_details LIMIT ${(limit * page) - limit}, ${limit} `, (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {

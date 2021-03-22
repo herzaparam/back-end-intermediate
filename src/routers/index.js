@@ -11,6 +11,6 @@ route.use('/movies', routeMovie)
 route.use('/location', routeLocation)
 route.use('/ticket', routeTicket)
 route.use('/transaction', routeTransaction)
-route.use('/user', routeUser )
+route.use('/user', routeUser)
 
 module.exports = route

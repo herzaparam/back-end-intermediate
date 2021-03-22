@@ -16,20 +16,20 @@ app.use(morgan('dev'))
 app.use('/v1', route)
 app.use('/img', express.static('./image'))
 
-app.use('*',(req,res,next)=>{
+app.use('*', (req, res, next) => {
     const error = new createError.NotFound()
     next(error)
 })
-app.use((err,req,res,next)=>{
-    if(!err.status){
+app.use((err, req, res, next) => {
+    if (!err.status) {
         err.status = 500
     }
     res.json({
-        message : err.message,
+        message: err.message,
         status_error: err.status
     })
 })
 
 app.listen(port, () => {
-  console.log('server is running port ' + port)
+    console.log('server is running port ' + port)
 })
