@@ -5,28 +5,59 @@ const { v4: uuidv4 } = require('uuid')
 const redis = require('redis')
 const client = redis.createClient(6379)
 
-exports.getAllMovies = (req, res, next) => {
-    moviesModel.getAllMovies()
+exports.getAllNowMovies = (req, res, next) => {
+    moviesModel.getAllNowMovies()
         .then((result) => {
             const resultMovies = result
-            client.setex("getAllMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
-            // setTimeout(()=>{
+            client.setex("getAllNowMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
+            setTimeout(()=>{
             helpers.response(res, resultMovies, 200)
-            // }, 1000)
+            }, 1000)
         })
         .catch((err) => {
             const error = new createError.InternalServerError()
             next(error)
         })
 }
-
-exports.getLimitMovies = (req, res, next) => {
+exports.getLimNowMovies = (req, res, next) => {
     const limit = req.query.limit
     const page = req.query.page
-    moviesModel.getLimitMovies(limit, page)
+    moviesModel.getLimNowMovies(limit, page)
         .then((result) => {
-            const resultProduct = result
-            helpers.response(res, resultProduct, 200)
+            const resultMovies = result
+            client.setex("getLimNowMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
+            setTimeout(()=>{
+            helpers.response(res, resultMovies, 200)
+            }, 1000)
+        }).catch((err) => {
+            const error = new createError.InternalServerError()
+            next(error)
+        })
+}
+exports.getAllUpMovies = (req, res, next) => {
+    moviesModel.getAllUpMovies()
+        .then((result) => {
+            const resultMovies = result
+            client.setex("getAllUpMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
+            setTimeout(()=>{
+            helpers.response(res, resultMovies, 200)
+            }, 1000)
+        })
+        .catch((err) => {
+            const error = new createError.InternalServerError()
+            next(error)
+        })
+}
+exports.getLimUpMovies = (req, res, next) => {
+    const limit = req.query.limit
+    const page = req.query.page
+    moviesModel.getLimUpMovies(limit, page)
+        .then((result) => {
+            const resultMovies = result
+            client.setex("getLimUpMovies", 60 * 60 * 12, JSON.stringify(resultMovies))
+            setTimeout(()=>{
+            helpers.response(res, resultMovies, 200)
+            }, 1000)
         }).catch((err) => {
             const error = new createError.InternalServerError()
             next(error)
@@ -72,16 +103,17 @@ exports.insertMovies = (req, res, next) => {
 
 exports.updateMovies = (req, res, next) => {
     const moviesId = req.params.id
-    const { movie_Id, title, genre, movie_duration, directed_by, casts, Synopsis, price } = req.body
+    const { title, genre, movie_duration, directed_by, casts, Synopsis, price } = req.body
     const data = {
-        movie_Id,
+
         title,
         genre,
         movie_duration,
         directed_by,
         casts,
         Synopsis,
-        price
+        price,
+        image: `http://localhost:8000/img/${req.file.filename}`
 
     }
     moviesModel.updateMovies(moviesId, data)

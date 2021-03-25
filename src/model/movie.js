@@ -1,9 +1,9 @@
 const connection = require('../config/db')
 
 const movies = {
-    getAllMovies: () => {
+    getAllNowMovies: () => {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM movie_details', (err, result) => {
+            connection.query('SELECT * FROM movie_details WHERE date_show ="now"', (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {
@@ -12,9 +12,33 @@ const movies = {
             })
         })
     },
-    getLimitMovies: (limit, page) => {
+    getLimNowMovies: (limit, page) => {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM movie_details LIMIT ${(limit * page) - limit}, ${limit} `, (err, result) => {
+            connection.query(`SELECT * FROM movie_details WHERE date_show = 'now' LIMIT ${(limit * page) - limit}, ${limit} `, (err, result) => {
+                if (!err) {
+                    resolve(result)
+                } else {
+                    (
+                        reject(err)
+                    )
+                }
+            })
+        })
+    },
+    getAllUpMovies: () => {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM movie_details WHERE date_show ="upcoming"', (err, result) => {
+                if (!err) {
+                    resolve(result)
+                } else {
+                    reject(err)
+                }
+            })
+        })
+    },
+    getLimUpMovies: (limit, page) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM movie_details WHERE date_show = 'upcoming' LIMIT ${(limit * page) - limit}, ${limit} `, (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {
@@ -49,6 +73,7 @@ const movies = {
         })
     },
     updateMovies: (id, data) => {
+        console.log(id);
         return new Promise((resolve, reject) => {
             connection.query('UPDATE movie_details SET ? WHERE movie_Id = ?', [data, id], (err, result) => {
                 if (!err) {

@@ -4,6 +4,8 @@ const helpers = require('../helper/helper')
 const bcrypt = require('bcryptjs')
 const common = require('../helper/common')
 const jwt = require('jsonwebtoken')
+const helperEmail = require('../helper/mailer')
+const { NotExtended } = require('http-errors')
 
 exports.getUserById = (req, res) => {
   const id = req.params.iduser
@@ -32,10 +34,14 @@ exports.login = async (req, res) => {
     }
     delete user.password
 
-    const payload = { email: user.email }
+    const payload = { email: user.email, role: user.role }
     jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
       user.token = token
-      return helpers.response(res, user, 200, null)
+      if (payload.role === 'admin') {
+        return helpers.response(res, user, 200, { message: 'you are login as admin' })
+      } else {
+        return helpers.response(res, user, 200, { message: 'you are login as user' })
+      }
     })
   } catch (error) {
     return helpers.response(res, null, 500, { message: 'internal server error' })
@@ -57,24 +63,30 @@ exports.register = async (req, res) => {
       phone_number: ''
     }
     const resultInsert = await userModel.register(user)
-    return helpers.response(res, resultInsert, 401, null)
+    await this.sendEmail(req, res)
   } catch (error) {
     console.log(error);
     return helpers.response(res, null, 500, { message: 'internal server error' })
-
   }
+
+}
+exports.sendEmail = async (req, res) => {
+  const email = req.body.email
+  const resEmail = await helperEmail.sendEmail(email)
+  console.log(resEmail);
+  return helpers.response(res, null, 200, { message: 'register will complete after you verify you email' })
 }
 
 
 exports.updateUser = (req, res) => {
   const userId = req.params.iduser
-  const { user_Id, fname, lname, email, phone_number } = req.body
+  const { fname, lname, email, phone_number } = req.body
   const user = {
-    user_Id,
     fname,
     lname,
     email,
-    phone_number
+    phone_number,
+    image: `http://localhost:8000/img/${req.file.filename}`
   }
   userModel.updateUser(userId, user)
     .then((result) => {
