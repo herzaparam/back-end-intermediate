@@ -3,59 +3,67 @@
 an API ticketing movie which can book cinema seat by choosing the film, schedule, and the location which you preferred. 
 Tickitz API, includes JWT, multer, and redis. registering login with otentication, authorization, and hashing password.
 
-## Getting Started
+## Built With
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](https://expressjs.com/)
+### Modules and Packages
+- nodemon
+- morgan
+- cors
+- dotenv
+- express
+- mysql2
+- http-error
+- standardjs
 
+## Getting Started
 ### Prerequisites
-[node.js](https://nodejs.org/en/download/), nodemon, morgan, cors, dotenv, express, mysql2, http-error, standadjs
+[node.js](https://nodejs.org/en/download/)
+[Postman](https://www.getpostman.com/) for testing
+[Database](database-example.sql)
 
 ### Installing
-1. after installation setup, initialize your node
-heres how to 
+
+Clone this repository and then use the package manager npm to install dependencies.
 ```
 npm init
 ```
+## Setup .env example
 
-2. auto start server with nodemon
-install :
+Create .env file in your root project folder.
+
+```env
+
+PORT="your port"
+DB_HOST = localhost
+DB_USER = root
+DB_NAME = "your database name"
+SECRET_KEY = "your secret key"
+USER_EMAIL = "your email"
+PASSWORD_EMAIL = "your email's password"
+
 ```
-npm install --save-dev nodemon
+## Run the app
+
+Development mode
+
+```bash
+npm run dev
 ```
 
-3. use morgan
-```
-var morgan = require('morgan')
+Deploy mode
+
+```bash
+npm start
 ```
 
-4.use dot env
-```
-require('dotenv').config()
-```
+## REST API
 
-### Running the test
- after ran the server. try to get movies data 
-*GET
-```
-http://localhost:8000/v1/movies/
-```
-*GET by title name
-```
-http://localhost:8000/v1/ticket/raya
-```
-parameter in url'raya' is needed to indentify data
-*PUT
-```
-http://localhost:8000/v1/ticket/9
-```
-parameter in url'9' is to defined which data need to updated
-*DELETE
-```
-http://localhost:8000/v1/ticket/9
-```
-parameter in url'9' is to defined which data need to deleted
-### Author
-* Herza Paramayudhanto
-### Acknowlegment
-* Risano Akbar - [git](https://github.com/muhammadrisano)
+[![run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/14783281/TzRVe6SL)
+
 
 ## Front end Repositories
 [here](https://github.com/herzaparam/React-Tickitz)
+
+### Contributor
+[Herza Paramayudhanto](https://github.com/herzaparam)
