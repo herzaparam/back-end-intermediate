@@ -1,5 +1,5 @@
-# API Tickitz
-### back-end-beginner-arka
+<h1 align="center">Tickitz API</h1>
+
 an API ticketing movie which can book cinema seat by choosing the film, schedule, and the location which you preferred. 
 Tickitz API, includes JWT, multer, and redis. registering login with otentication, authorization, and hashing password.
 
