@@ -26,7 +26,7 @@ Tickitz API, includes JWT, multer, and redis. registering login with otenticatio
 
 Clone this repository and then use the package manager npm to install dependencies.
 ```
-npm init
+npm install
 ```
 ## Setup .env example
 
