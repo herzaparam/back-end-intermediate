@@ -65,6 +65,7 @@ npm start
 ## Front end Repositories
 also you can check our front end repositories [here](https://github.com/herzaparam/React-Tickitz)
 
-
 ### Contributor
 [Herza Paramayudhanto](https://github.com/herzaparam)
+contact :
+herzaparam@gmail.com
