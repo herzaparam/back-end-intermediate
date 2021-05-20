@@ -79,5 +79,5 @@ also you can check our front end repositories [here](https://github.com/herzapar
 ### Contributor
 [Herza Paramayudhanto](https://github.com/herzaparam)
 
-contact :
+### contact :
 If you want to contact me you can reach me at herzaparam@gmail.com
