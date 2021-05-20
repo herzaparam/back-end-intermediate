@@ -57,6 +57,17 @@ Deploy mode
 npm start
 ```
 
+## Contributing to Zwallet API
+To contribute to Zwallet API, follow these steps:
+
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin <project_name>/<location>`
+5. Create the pull request.
+
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
 ## REST API
 
 [![run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/14783281/TzRVe6SL)
@@ -69,4 +80,4 @@ also you can check our front end repositories [here](https://github.com/herzapar
 [Herza Paramayudhanto](https://github.com/herzaparam)
 
 contact :
-herzaparam@gmail.com
+If you want to contact me you can reach me at herzaparam@gmail.com
