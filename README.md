@@ -1,5 +1,13 @@
+<div align="center">
+  <img width="230" src="https://github.com/herzaparam/React-Tickitz/blob/main/src/assets/image/Tickitz%201.png" alt="next.js logo">
+ </div> 
+<hr>
+ <div align="center">
+  <img width="100" src="https://github.com/herzaparam/zwallet-arka/blob/main/public/nodejs.png" alt="node js">
+  <img width="100" src="https://github.com/herzaparam/zwallet-arka/blob/main/public/expresslogo.png" alt="express js">
+</div>
+<hr>
 <h1 align="center">Tickitz API</h1>
-
 an API ticketing movie which can book cinema seat by choosing the film, schedule, and the location which you preferred. 
 Tickitz API, includes JWT, multer, and redis. registering login with otentication, authorization, and hashing password.
 
